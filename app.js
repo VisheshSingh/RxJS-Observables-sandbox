@@ -219,3 +219,28 @@ inpSource$.subscribe(e => {
     $("#repo").text("Public Repos: " + x.data.public_repos);
   });
 });
+
+//RxJS Operators
+const mapOp$ = Rx.Observable.interval(100).take(10);
+mapOp$.map(v => v * v).subscribe(x => {
+  console.log("new val:" + x);
+});
+
+const array = Rx.Observable.from(["tom", "sam", "shaun"]).map(v =>
+  v.toUpperCase()
+);
+
+array.subscribe(x => {
+  console.log(x);
+});
+
+const newObj = [
+  { name: "Bill", age: 35 },
+  { name: "Kayla", age: 31 },
+  { name: "Stela", age: 21 }
+];
+
+const users$ = Rx.Observable.from(newObj).pluck("name");
+users$.subscribe(x => {
+  console.log(x);
+});
