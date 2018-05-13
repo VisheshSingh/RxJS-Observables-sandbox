@@ -155,3 +155,33 @@ int$.subscribe(
     console.log("completed");
   }
 );
+
+//Observables from timer
+const timer$ = Rx.Observable.timer(5000, 1000).take(5);
+
+timer$.subscribe(
+  x => {
+    console.log(x);
+  },
+  err => {
+    console.log(err);
+  },
+  () => {
+    console.log("completed");
+  }
+);
+
+//Observables from range
+const range$ = Rx.Observable.range(25, 100);
+
+range$.subscribe(
+  x => {
+    console.log(x);
+  },
+  err => {
+    console.log(err);
+  },
+  () => {
+    console.log("completed");
+  }
+);
