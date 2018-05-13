@@ -185,3 +185,37 @@ range$.subscribe(
     console.log("completed");
   }
 );
+
+//Observables from Promises
+var promise = new Promise((resolve, reject) => {
+  console.log("Creating Promise");
+  setTimeout(() => {
+    resolve("Hello from promise");
+  }, 2000);
+});
+
+// promise.then(x => {
+//   console.log(x);
+// });
+
+const promise$ = Rx.Observable.fromPromise(promise);
+promise$.subscribe(x => {
+  console.log(x);
+});
+
+function getUser(username) {
+  return $.ajax({
+    url: "https://api.github.com/users/" + username,
+    dataType: "jsonp"
+  }).promise();
+}
+
+const inpSource$ = Rx.Observable.fromEvent($("#inp"), "keyup");
+
+inpSource$.subscribe(e => {
+  Rx.Observable.fromPromise(getUser(e.target.value)).subscribe(x => {
+    $("#name").text(x.data.name);
+    $("#email").text(x.data.blog);
+    $("#repo").text("Public Repos: " + x.data.public_repos);
+  });
+});
