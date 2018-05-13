@@ -261,3 +261,10 @@ const source3$ = Rx.Observable.range(0, 5).map(v => "Source1: " + v);
 const source4$ = Rx.Observable.range(6, 5).map(v => "Source2: " + v);
 
 Rx.Observable.merge(source3$, source4$).subscribe(x => console.log(x));
+
+//MergeMap, SwitchMap
+Rx.Observable.of("Hello")
+  .mergeMap(v => {
+    return Rx.Observable.of(v + "Mergemap");
+  })
+  .subscribe(x => console.log(x));
