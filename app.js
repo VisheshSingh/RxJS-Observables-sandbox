@@ -140,3 +140,18 @@ source$.catch(err => Rx.Observable.of(err)).subscribe(
     console.log("completed");
   }
 );
+
+//Observables from interval
+const int$ = Rx.Observable.interval(100).take(5);
+
+int$.subscribe(
+  x => {
+    console.log(x);
+  },
+  err => {
+    console.log(err);
+  },
+  () => {
+    console.log("completed");
+  }
+);
