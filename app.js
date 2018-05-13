@@ -244,3 +244,20 @@ const users$ = Rx.Observable.from(newObj).pluck("name");
 users$.subscribe(x => {
   console.log(x);
 });
+
+//Merge & Concat
+Rx.Observable.of("Hello")
+  .merge(Rx.Observable.of("Everyone"))
+  .subscribe(x => console.log(x));
+
+const source1$ = Rx.Observable.interval(2000).map(v => "Source1: " + v);
+const source2$ = Rx.Observable.interval(500).map(v => "Source2: " + v);
+
+Rx.Observable.merge(source1$, source2$)
+  .take(25)
+  .subscribe(x => console.log(x));
+
+const source3$ = Rx.Observable.range(0, 5).map(v => "Source1: " + v);
+const source4$ = Rx.Observable.range(6, 5).map(v => "Source2: " + v);
+
+Rx.Observable.merge(source3$, source4$).subscribe(x => console.log(x));
