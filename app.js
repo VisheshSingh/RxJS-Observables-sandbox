@@ -268,3 +268,13 @@ Rx.Observable.of("Hello")
     return Rx.Observable.of(v + "Mergemap");
   })
   .subscribe(x => console.log(x));
+
+//Subject
+
+var subject = new Rx.Subject();
+
+subject.subscribe(v => {
+  console.log(v);
+});
+
+subject.next("A new data piece");
